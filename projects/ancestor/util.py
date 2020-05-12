@@ -77,7 +77,7 @@ class Graph:
                 visited.add(v)
 
                 # Queue up the neighbors of the dequeued / visited vertex
-                for next_vert in self.get_neighbors(v):
+                for next_vert in self.get_parents(v):
                     q.enqueue(next_vert)
 
     def dft(self, starting_vertex):
@@ -85,6 +85,7 @@ class Graph:
 
         s = Stack()
         s.push(starting_vertex)
+        result = []
 
         # Keep track of visited nodes
         visited = set()
@@ -96,14 +97,16 @@ class Graph:
 
             # If it's not been visisted
             if v not in visited:
-                print(v)
+                result.append(v)
 
                 # Mark as visited
                 visited.add(v)
 
                 # add to the stack the neighbors of the popped vertex
-                for next_vert in self.get_neighbors(v):
+                for next_vert in self.get_parents(v):
                     s.push(next_vert)
+
+        return result
 
     def dft_recursive(self, starting_vertex):
         # create list for printing, at the end of function
@@ -122,7 +125,7 @@ class Graph:
             # Helper pushes visited vertex into result array
             result.append(vertex)
             # Loop over all the values in the adjancencyList for that vertex
-            for neighbor in self.get_neighbors(vertex):
+            for neighbor in self.get_parents(vertex):
                 # For any values not visited recursively invoke the hlper function on that vertex
                 try:
                     if neighbor not in visited_log:
@@ -160,7 +163,7 @@ class Graph:
                 if v == destination_vertex:
                     return result
 
-                for next_vert in self.get_neighbors(v):
+                for next_vert in self.get_parents(v):
                     q.enqueue(next_vert)
 
     def dfs(self, starting_vertex, destination_vertex):
@@ -189,7 +192,7 @@ class Graph:
                     return result
 
                 # add to the stack the neighbors of the popped vertex
-                for next_vert in self.get_neighbors(v):
+                for next_vert in self.get_parents(v):
                     s.push(next_vert)
 
     def dfs_recursive(self, start_vert, target_value, visited=None, path=None):
