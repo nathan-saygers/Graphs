@@ -74,13 +74,34 @@ class Graph:
                     s.push(next_vert)
 
     def dft_recursive(self, starting_vertex):
-        """
-        Print each vertex in depth-first order
-        beginning from starting_vertex.
+        # create list for printing, at the end of function
+        result = []
+        # create an object for tracking which nodes have been visisted
+        visited_log = {}
+        # create helper function that accepts a vertex
 
-        This should be done using recursion.
-        """
-        pass  # TODO
+        def dft(vertex):
+            # Helper function returns early if the vert is empty
+            if vertex == None:
+                print('vertex == none')
+                return
+            # Helper function places the vertex it accepts into visisted
+            visited_log[vertex] = True
+            # Helper pushes visited vertex into result array
+            result.append(vertex)
+            # Loop over all the values in the adjancencyList for that vertex
+            for neighbor in self.get_neighbors(vertex):
+                # For any values not visited recursively invoke the hlper function on that vertex
+                try:
+                    if neighbor not in visited_log:
+                        dft(neighbor)
+                except KeyError:
+                    continue
+        # Invoke helper function with starting vertex
+        dft(starting_vertex)
+        # Return the result array
+        for n in result:
+            print(n)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
