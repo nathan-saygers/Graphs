@@ -52,7 +52,7 @@ class Graph:
         else:
             raise IndexError("Vertex does not exist in graph")
 
-    def get_neighbors(self, vertex_id):
+    def get_parents(self, vertex_id):
         return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
