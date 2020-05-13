@@ -26,7 +26,10 @@ def earliest_ancestor(ancestors, starting_node):
     result = ancestor_graph.dft(starting_node)
 
     if ancestor_graph.get_parents(result[-2]) == set():
-        return result[-2]
+        if result[-2] < result[-1]:
+            return result[-2]
+        else:
+            return result[-1]
 
     return result[-1]
 
